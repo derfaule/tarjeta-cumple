@@ -224,8 +224,8 @@ main {
 
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
-  grid-auto-rows: clamp(380px, 42vw, 480px);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  grid-auto-rows: minmax(clamp(420px, 46vw, 540px), auto);
   grid-auto-flow: dense;
   gap: clamp(0.6rem, 1.5vw, 1.2rem);
 }
@@ -253,7 +253,7 @@ main {
 }
 
 @media (min-width: 1100px) {
-  .bento-item:nth-child(4n+1) { grid-column: span 2; }
+  .bento-item:nth-child(1) { grid-column: span 2; }
 }
 
 .bento-item:nth-child(2n) { animation-delay: -2.6s; }
@@ -308,40 +308,61 @@ main {
 }
 
 .bento-content {
-  flex: 0 0 auto;
-  padding: 0.6rem 0.8rem;
+  flex: 1 1 auto;
+  padding: 0.7rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .bento-title {
   font-family: 'Bungee', sans-serif;
   font-size: clamp(0.85rem, 2.4vw, 1.15rem);
   color: var(--pink);
-  margin: 0 0 0.3rem;
+  margin: 0;
   text-shadow: 1px 1px 0 #fff;
 }
 
-.bento-desc {
-  font-family: 'Fredoka', sans-serif;
+.bento-poem {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
   color: var(--ink);
-  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+  line-height: 1.35;
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  white-space: pre-line;
+  flex: 1 1 auto;
 }
 
-.bento-map {
-  flex: 0 0 clamp(80px, 14vw, 130px);
-  border-top: 3px solid var(--cream);
+.bento-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
 }
 
-.bento-map iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
+.link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+  color: #fff;
+  background: var(--lavender);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, background 0.2s ease;
 }
+
+.link-pill:hover {
+  transform: scale(1.06);
+}
+
+.link-pill.link-instagram { background: #d6249f; }
+.link-pill.link-maps { background: var(--pink); }
 
 /* ===== Detail overlay ===== */
 .detail-overlay {
@@ -390,6 +411,24 @@ main {
 
 .detail-overlay.open .detail-card {
   transform: scale(1) rotate(0deg);
+}
+
+.detail-poem {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: var(--ink);
+  font-size: clamp(1.1rem, 3.2vw, 1.5rem);
+  line-height: 1.4;
+  margin: 0;
+  white-space: pre-line;
+  max-width: 60ch;
+}
+
+.detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .detail-close {
@@ -692,7 +731,7 @@ main {
 @media (max-width: 700px) {
   .bento-grid {
     grid-template-columns: 1fr;
-    grid-auto-rows: clamp(360px, 90vw, 440px);
+    grid-auto-rows: minmax(420px, auto);
   }
 }
 

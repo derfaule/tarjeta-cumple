@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="100" fill="#FFE0CC"/>
+  <!-- chubby body -->
+  <ellipse cx="100" cy="158" rx="62" ry="38" fill="#1a1a1a"/>
+  <ellipse cx="58" cy="178" rx="16" ry="10" fill="#1a1a1a"/>
+  <ellipse cx="142" cy="178" rx="16" ry="10" fill="#1a1a1a"/>
+  <!-- head -->
+  <polygon points="55,66 75,24 95,71" fill="#1a1a1a"/>
+  <polygon points="105,71 125,24 145,66" fill="#1a1a1a"/>
+  <polygon points="64,60 75,36 86,63" fill="#FF9F6B"/>
+  <polygon points="114,63 125,36 136,60" fill="#FF9F6B"/>
+  <circle cx="100" cy="108" r="56" fill="#1a1a1a"/>
+  <ellipse cx="80" cy="102" rx="13" ry="16" fill="#fff"/>
+  <ellipse cx="120" cy="102" rx="13" ry="16" fill="#fff"/>
+  <circle cx="82" cy="106" r="6.5" fill="#1a1a1a"/>
+  <circle cx="122" cy="106" r="6.5" fill="#1a1a1a"/>
+  <circle cx="84" cy="100" r="2.2" fill="#fff"/>
+  <circle cx="124" cy="100" r="2.2" fill="#fff"/>
+  <polygon points="94,124 106,124 100,133" fill="#FF6FA8"/>
+  <path d="M100,137 q-9,9 -18,4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M100,137 q9,9 18,4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <line x1="58" y1="120" x2="24" y2="114" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <line x1="58" y1="128" x2="24" y2="132" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <line x1="142" y1="120" x2="176" y2="114" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <line x1="142" y1="128" x2="176" y2="132" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  <!-- belly heart -->
+  <path d="M100,150 c-6,-8 -18,-3 -16,6 c1,7 10,12 16,17 c6,-5 15,-10 16,-17 c2,-9 -10,-14 -16,-6 z" fill="#FF6FA8"/>
+</svg>

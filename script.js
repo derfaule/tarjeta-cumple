@@ -1,66 +1,48 @@
 const steps = [
   {
-    title: "La Invitación Maldita 🦇",
-    before: "Antes: revisa tu correo embrujado, una lechuza (o un email) trae tu invitación...",
-    description: "Recibe tu invitación oficial al aquelarre de cumpleaños más kitsch del año. ¡Disfraz obligatorio!",
-    after: "Después: marca la fecha en tu calendario con purpurina y empieza la cuenta regresiva 🌙",
-    location: "Plaza Mayor, Madrid"
+    label: "Un gato bailando",
+    image: "images/cat-dancing.svg",
+    poem: "El desayuno para mi amada es importante\nle gusta en cantidades no mezquinas\nFranceses, laminados con chocolate\npor eso, en la mañana lo hacemos sin rutinas.",
+    links: [
+      { type: "instagram", url: "https://www.instagram.com/Saintpanaderia/", label: "Saint Panadería" },
+      { type: "maps", url: "https://maps.app.goo.gl/Jixf1Zr94hxWhKWt7", label: "Cómo llegar" }
+    ]
   },
   {
-    title: "El Ritual de Arreglo 💅",
-    before: "Antes: elige tu mejor outfit felino, entre más brillos mejor.",
-    description: "Maquillaje neón, orejitas de gato y mucho glitter. Hoy todos somos gatos negros de gala.",
-    after: "Después: revisa el espejo tres veces, ¡la magia está en los detalles!",
-    location: "Gran Vía, Madrid"
+    label: "Un gato con flores",
+    image: "images/cat-flowers.svg",
+    poem: "¡Flores! exclama Luisa\nno puede con el color y los olores\nle encanta que le llegue con la brisa\nes por eso visitamos los bosques y sus flores.",
+    links: [
+      { type: "maps", url: "https://maps.app.goo.gl/RDGESJsba7BncK1YA", label: "Cómo llegar" }
+    ]
   },
   {
-    title: "La Llegada Triunfal 🚪",
-    before: "Antes: respira hondo y prepárate para entrar como toda una estrella.",
-    description: "Cruza el umbral entre humo de máquina y luces moradas. ¡Bienvenido al cumple!",
-    after: "Después: deja tu abrigo (y tus preocupaciones) en la entrada.",
-    location: "Puerta del Sol, Madrid"
+    label: "Un gato comiendo",
+    image: "images/cat-churros.svg",
+    poem: "Unos churros del moro, esto no necesita poesía, ¿o sí?",
+    links: []
   },
   {
-    title: "El Photocall Felino 📸",
-    before: "Antes: practica tu mejor pose misteriosa frente al espejo.",
-    description: "Una zona decorada con gatos negros, lunas y estrellas para las fotos más kitsch de la noche.",
-    after: "Después: sube tu foto favorita con el hashtag #GatoCumpleañero.",
-    location: "Mercado de San Miguel, Madrid"
+    label: "Un gato con flores",
+    image: "images/cat-flowers.svg",
+    poem: "Hoy en tu día no hubo flores\npensarás: qué atípico no tenerlas,\npues no, en tu día iremos directo a ellas\ny así en el mercado comprarte a montones.",
+    links: [
+      { type: "maps", url: "https://maps.app.goo.gl/FDQKfxmobU2nnVNx5", label: "Cómo llegar" }
+    ]
   },
   {
-    title: "Juegos de Brujas 🪄",
-    before: "Antes: forma equipos y elige tu varita (cuchara) de la suerte.",
-    description: "Juegos temáticos: caza del gato negro, bingo de hechizos y trivia de cumpleaños.",
-    after: "Después: el equipo ganador recibe un amuleto (dulce) especial.",
-    location: "Parque del Retiro, Madrid"
+    label: "Un gato con algo de beber caliente",
+    image: "images/cat-hot-drink.svg",
+    poem: "Cacahuatl, kakw, biziaa, cajecuas\ntodos nombres que no tenemos\npero si digo chocolate, de una entendemos\npues bien, te invitamos a uno y a todos los que quieras.",
+    links: [
+      { type: "instagram", url: "https://www.instagram.com/larifachocolateria/", label: "La Rifa Chocolatería" }
+    ]
   },
   {
-    title: "El Festín 🍕",
-    before: "Antes: aparta tu lugar en la mesa, ¡el banquete está por comenzar!",
-    description: "Comida deliciosa servida entre velas y decoración kitsch llena de gatos por doquier.",
-    after: "Después: deja espacio para el postre... ¡algo mágico se aproxima!",
-    location: "Mercado de San Antón, Madrid"
-  },
-  {
-    title: "El Pastel Mágico 🎂",
-    before: "Antes: apaga las luces, las velas están listas para encenderse.",
-    description: "¡Hora del pastel! Pide tu deseo bajo la mirada atenta de nueve gatos negros.",
-    after: "Después: aplausos, fotos y el primer corte ceremonial del pastel.",
-    location: "Chocolatería San Ginés, Madrid"
-  },
-  {
-    title: "Apertura de Regalos 🎁",
-    before: "Antes: forma un círculo mágico alrededor del homenajeado.",
-    description: "Cada regalo se abre como si fuera un cofre encantado, ¡con su propio drumroll!",
-    after: "Después: agradecimientos especiales y abrazos para todos.",
-    location: "El Rastro, Madrid"
-  },
-  {
-    title: "El Hechizo de Despedida 🌌",
-    before: "Antes: prepárate para el último baile de la noche.",
-    description: "Una última canción, una última foto grupal y un brindis bajo la luna.",
-    after: "Después: vuelve a casa con el corazón lleno de magia (y un dulce extra en el bolsillo).",
-    location: "Templo de Debod, Madrid"
+    label: "Un gato negro gordo",
+    image: "images/cat-fat-black.svg",
+    poem: "Detallista no seré\nno tendré el toque que tú\npero estas palabras del corazón vienen\ny que para siempre serán para ti.\n\nTe amo amorcito.",
+    links: []
   }
 ];
 
@@ -76,9 +58,8 @@ const detailNext = document.getElementById("detailNext");
 const detailImg = document.getElementById("detailImg");
 const detailStepLabel = document.getElementById("detailStepLabel");
 const detailTitle = document.getElementById("detailTitle");
-const detailBefore = document.getElementById("detailBefore");
-const detailDescription = document.getElementById("detailDescription");
-const detailAfter = document.getElementById("detailAfter");
+const detailPoem = document.getElementById("detailPoem");
+const detailLinks = document.getElementById("detailLinks");
 
 function catImageUrl(seed, size) {
   return `https://cataas.com/cat/black?width=${size}&height=${size}&i=${seed}`;
@@ -119,8 +100,12 @@ function buildBackgroundCats() {
   }
 }
 
-function mapEmbedUrl(location) {
-  return `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`;
+const LINK_ICONS = { instagram: "📷", maps: "📍" };
+
+function renderLinks(step) {
+  return step.links
+    .map(link => `<a class="link-pill link-${link.type}" href="${link.url}" target="_blank" rel="noopener noreferrer">${LINK_ICONS[link.type] || "🔗"} ${escapeHtml(link.label)}</a>`)
+    .join("");
 }
 
 function buildBentoGrid() {
@@ -130,25 +115,19 @@ function buildBentoGrid() {
     item.tabIndex = 0;
     item.setAttribute("role", "button");
     item.style.animationDelay = `-${(i * 0.8).toFixed(1)}s`;
-    item.setAttribute("aria-label", `Ver paso ${i + 1}: ${step.title}`);
+    item.setAttribute("aria-label", `Ver paso ${i + 1}: ${step.label}`);
 
     item.innerHTML = `
       <div class="bento-photo">
-        <img alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
+        <img src="${step.image}" alt="${escapeHtml(step.label)}" loading="lazy">
         <span class="bento-badge">${i + 1}</span>
       </div>
       <div class="bento-content">
-        <h3 class="bento-title">${step.title}</h3>
-        <p class="bento-desc">${step.description}</p>
-      </div>
-      <div class="bento-map" aria-hidden="true">
-        <iframe src="${mapEmbedUrl(step.location)}" loading="lazy" tabindex="-1" title="Mapa de ${step.title}"></iframe>
+        <h3 class="bento-title">${escapeHtml(step.label)}</h3>
+        <p class="bento-poem">${escapeHtml(step.poem)}</p>
+        ${step.links.length ? `<div class="bento-links">${renderLinks(step)}</div>` : ""}
       </div>
     `;
-
-    const img = item.querySelector("img");
-    withFallback(img, i);
-    img.src = catImageUrl(i, 400);
 
     item.addEventListener("click", () => openDetail(i));
     item.addEventListener("keydown", (e) => {
@@ -192,15 +171,13 @@ function openDetail(index) {
   const step = steps[currentIndex];
 
   detailImg.classList.remove("fallback-cat");
-  detailImg.alt = `Gato negro kitsch del paso ${currentIndex + 1}`;
-  detailImg.src = catImageUrl(currentIndex, 600);
-  withFallback(detailImg, currentIndex);
+  detailImg.alt = step.label;
+  detailImg.src = step.image;
 
   detailStepLabel.textContent = `Paso ${currentIndex + 1} de ${TOTAL}`;
-  buildCutoutTitle(detailTitle, step.title);
-  detailBefore.textContent = `🔸 ${step.before}`;
-  detailDescription.textContent = step.description;
-  detailAfter.textContent = `🔹 ${step.after}`;
+  buildCutoutTitle(detailTitle, step.label);
+  detailPoem.textContent = step.poem;
+  detailLinks.innerHTML = renderLinks(step);
 
   detailOverlay.classList.add("open");
 }

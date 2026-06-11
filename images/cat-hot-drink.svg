@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="100" fill="#E3D2FF"/>
+  <g transform="translate(-12 0)">
+    <polygon points="55,70 75,28 95,75" fill="#1a1a1a"/>
+    <polygon points="105,75 125,28 145,70" fill="#1a1a1a"/>
+    <polygon points="64,64 75,40 86,67" fill="#C9A3F5"/>
+    <polygon points="114,67 125,40 136,64" fill="#C9A3F5"/>
+    <circle cx="100" cy="108" r="50" fill="#1a1a1a"/>
+    <ellipse cx="82" cy="102" rx="12" ry="15" fill="#fff"/>
+    <ellipse cx="118" cy="102" rx="12" ry="15" fill="#fff"/>
+    <circle cx="84" cy="105" r="6" fill="#1a1a1a"/>
+    <circle cx="120" cy="105" r="6" fill="#1a1a1a"/>
+    <circle cx="86" cy="100" r="2" fill="#fff"/>
+    <circle cx="122" cy="100" r="2" fill="#fff"/>
+    <polygon points="95,120 105,120 100,128" fill="#FF6FA8"/>
+    <path d="M100,132 q-8,8 -16,4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M100,132 q8,8 16,4" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <line x1="62" y1="118" x2="30" y2="112" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    <line x1="62" y1="125" x2="30" y2="128" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- mug -->
+  <g>
+    <rect x="146" y="118" width="42" height="38" rx="6" fill="#fff"/>
+    <path d="M188,124 q16,0 16,14 q0,14 -16,14 z" fill="none" stroke="#fff" stroke-width="6"/>
+    <rect x="146" y="118" width="42" height="8" fill="#7a4a2b"/>
+    <!-- steam -->
+    <path d="M156,108 q-6,-8 0,-16 q6,-8 0,-16" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/>
+    <path d="M174,108 q-6,-8 0,-16 q6,-8 0,-16" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/>
+  </g>
+</svg>
