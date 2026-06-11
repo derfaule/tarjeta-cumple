@@ -69,6 +69,20 @@ function catImageUrl(seed, size) {
   return `https://cataas.com/cat/black?width=${size}&height=${size}&i=${seed}`;
 }
 
+const FALLBACK_CATS = ["images/cat-1.svg", "images/cat-2.svg", "images/cat-3.svg"];
+
+function fallbackCatUrl(seed) {
+  return FALLBACK_CATS[seed % FALLBACK_CATS.length];
+}
+
+// If the live cataas.com photo fails to load, swap in a local kitsch cat illustration
+function withFallback(img, seed) {
+  img.addEventListener("error", () => {
+    img.src = fallbackCatUrl(seed);
+    img.classList.add("fallback-cat");
+  }, { once: true });
+}
+
 const BG_CAT_COUNT = 8;
 
 function buildBackgroundCats() {
@@ -77,7 +91,6 @@ function buildBackgroundCats() {
     const img = document.createElement("img");
     const size = 60 + Math.random() * 90;
     img.className = "bg-cat";
-    img.src = catImageUrl(`bg${i}`, 200);
     img.alt = "";
     img.style.width = `${size}px`;
     img.style.height = `${size}px`;
@@ -85,6 +98,8 @@ function buildBackgroundCats() {
     img.style.left = `${Math.random() * 95}%`;
     img.style.animationDuration = `${20 + Math.random() * 25}s`;
     img.style.animationDelay = `-${Math.random() * 20}s`;
+    withFallback(img, i);
+    img.src = catImageUrl(`bg${i}`, 200);
     layer.appendChild(img);
   }
 }
@@ -99,7 +114,7 @@ function buildSlides() {
     slide.innerHTML = `
       <div class="photo-frame ${tilt}">
         <span class="washi-tape"></span>
-        <img class="slide-img" src="${catImageUrl(i, 600)}" alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
+        <img class="slide-img" alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
       </div>
       <p class="slide-step-label">Paso ${i + 1} de ${TOTAL}</p>
       <h3 class="slide-title">${step.title}</h3>
@@ -107,6 +122,10 @@ function buildSlides() {
       <p class="slide-description">${step.description}</p>
       <p class="slide-text after-text">🔹 ${step.after}</p>
     `;
+
+    const img = slide.querySelector(".slide-img");
+    withFallback(img, i);
+    img.src = catImageUrl(i, 600);
 
     stage.appendChild(slide);
   });

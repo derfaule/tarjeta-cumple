@@ -376,6 +376,12 @@ main {
   display: block;
 }
 
+.slide-img.fallback-cat {
+  object-fit: contain;
+  background: #fff;
+  padding: 10px;
+}
+
 .slide-step-label {
   font-family: 'Caveat', cursive;
   font-weight: 700;
