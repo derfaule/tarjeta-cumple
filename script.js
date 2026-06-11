@@ -47,19 +47,9 @@ const steps = [
 ];
 
 const TOTAL = steps.length;
-let currentIndex = 0;
+let expandedIndex = null;
 
 const bentoGrid = document.getElementById("bentoGrid");
-const detailOverlay = document.getElementById("detailOverlay");
-const detailBackdrop = document.getElementById("detailBackdrop");
-const detailClose = document.getElementById("detailClose");
-const detailPrev = document.getElementById("detailPrev");
-const detailNext = document.getElementById("detailNext");
-const detailImg = document.getElementById("detailImg");
-const detailStepLabel = document.getElementById("detailStepLabel");
-const detailTitle = document.getElementById("detailTitle");
-const detailPoem = document.getElementById("detailPoem");
-const detailLinks = document.getElementById("detailLinks");
 
 function catImageUrl(seed, size) {
   return `https://cataas.com/cat/black?width=${size}&height=${size}&i=${seed}`;
@@ -114,12 +104,15 @@ function buildBentoGrid() {
     item.className = "bento-item";
     item.tabIndex = 0;
     item.setAttribute("role", "button");
-    item.style.animationDelay = `-${(i * 0.8).toFixed(1)}s`;
-    item.setAttribute("aria-label", `Ver paso ${i + 1}: ${step.label}`);
+    item.style.setProperty("--i", i);
+    item.style.animationDelay = `${(i * 0.08).toFixed(2)}s, -${(i * 0.8).toFixed(1)}s`;
+    item.style.animationDirection = `normal, ${i % 2 === 0 ? "alternate" : "alternate-reverse"}`;
+    item.setAttribute("aria-label", `Expandir paso ${i + 1}: ${step.label}`);
 
     item.innerHTML = `
       <div class="bento-photo">
         <img src="${step.image}" alt="${escapeHtml(step.label)}" loading="lazy">
+        <span class="bento-shape" aria-hidden="true"></span>
         <span class="bento-badge">${i + 1}</span>
       </div>
       <div class="bento-content">
@@ -129,16 +122,49 @@ function buildBentoGrid() {
       </div>
     `;
 
-    item.addEventListener("click", () => openDetail(i));
+    item.addEventListener("click", () => toggleExpand(i));
     item.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        openDetail(i);
+        toggleExpand(i);
       }
     });
 
     bentoGrid.appendChild(item);
   });
+}
+
+function getGridCols() {
+  if (window.innerWidth >= 1100) return 3;
+  if (window.innerWidth >= 700) return 2;
+  return 1;
+}
+
+function applyGridTemplate() {
+  const cols = getGridCols();
+
+  if (expandedIndex === null || cols === 1) {
+    bentoGrid.style.gridTemplateColumns = "";
+    bentoGrid.style.gridTemplateRows = "";
+    return;
+  }
+
+  const rows = TOTAL / cols;
+  const expandedCol = expandedIndex % cols;
+  const expandedRow = Math.floor(expandedIndex / cols);
+
+  bentoGrid.style.gridTemplateColumns = Array.from({ length: cols }, (_, c) => c === expandedCol ? "2fr" : "1fr").join(" ");
+  bentoGrid.style.gridTemplateRows = Array.from({ length: rows }, (_, r) => r === expandedRow ? "2fr" : "1fr").join(" ");
+}
+
+function toggleExpand(index) {
+  expandedIndex = expandedIndex === index ? null : index;
+
+  document.querySelectorAll(".bento-item").forEach((item, i) => {
+    item.classList.toggle("expanded", i === expandedIndex);
+  });
+
+  applyGridTemplate();
 }
 
 const titleColors = ["#ff0fc4", "#ffb84d", "#00e6a0", "#00c3ff", "#b026ff", "#ff5e3a", "#ffe600"];
@@ -166,26 +192,6 @@ function buildCutoutTitle(el, text) {
   });
 }
 
-function openDetail(index) {
-  currentIndex = ((index % TOTAL) + TOTAL) % TOTAL;
-  const step = steps[currentIndex];
-
-  detailImg.classList.remove("fallback-cat");
-  detailImg.alt = step.label;
-  detailImg.src = step.image;
-
-  detailStepLabel.textContent = `Paso ${currentIndex + 1} de ${TOTAL}`;
-  buildCutoutTitle(detailTitle, step.label);
-  detailPoem.textContent = step.poem;
-  detailLinks.innerHTML = renderLinks(step);
-
-  detailOverlay.classList.add("open");
-}
-
-function closeDetail() {
-  detailOverlay.classList.remove("open");
-}
-
 // ===== HTML escaping =====
 function escapeHtml(str) {
   const div = document.createElement("div");
@@ -198,15 +204,4 @@ buildBackgroundCats();
 buildCutoutTitle(document.getElementById("heroTitle"), document.getElementById("heroTitle").textContent);
 buildBentoGrid();
 
-detailClose.addEventListener("click", closeDetail);
-detailBackdrop.addEventListener("click", closeDetail);
-detailPrev.addEventListener("click", () => openDetail(currentIndex - 1));
-detailNext.addEventListener("click", () => openDetail(currentIndex + 1));
-
-// Keyboard navigation (only while the detail overlay is open)
-document.addEventListener("keydown", (e) => {
-  if (!detailOverlay.classList.contains("open")) return;
-  if (e.key === "Escape") closeDetail();
-  if (e.key === "ArrowLeft") openDetail(currentIndex - 1);
-  if (e.key === "ArrowRight") openDetail(currentIndex + 1);
-});
+window.addEventListener("resize", applyGridTemplate);
