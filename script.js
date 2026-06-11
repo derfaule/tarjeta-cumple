@@ -1,7 +1,7 @@
 const steps = [
   {
     label: "Un gato bailando",
-    image: "images/cat-dancing.svg",
+    image: "images/1.gif",
     poem: "El desayuno para mi amada es importante\nle gusta en cantidades no mezquinas\nFranceses, laminados con chocolate\npor eso, en la mañana lo hacemos sin rutinas.",
     links: [
       { type: "instagram", url: "https://www.instagram.com/Saintpanaderia/", label: "Saint Panadería" },
@@ -10,7 +10,7 @@ const steps = [
   },
   {
     label: "Un gato con flores",
-    image: "images/cat-flowers.svg",
+    image: "images/2.jpg",
     poem: "¡Flores! exclama Luisa\nno puede con el color y los olores\nle encanta que le llegue con la brisa\nes por eso visitamos los bosques y sus flores.",
     links: [
       { type: "maps", url: "https://maps.app.goo.gl/RDGESJsba7BncK1YA", label: "Cómo llegar" }
@@ -18,13 +18,13 @@ const steps = [
   },
   {
     label: "Un gato comiendo",
-    image: "images/cat-churros.svg",
+    image: "images/3.jpg",
     poem: "Unos churros del moro, esto no necesita poesía, ¿o sí?",
     links: []
   },
   {
     label: "Un gato con flores",
-    image: "images/cat-flowers.svg",
+    image: "images/4.jpg",
     poem: "Hoy en tu día no hubo flores\npensarás: qué atípico no tenerlas,\npues no, en tu día iremos directo a ellas\ny así en el mercado comprarte a montones.",
     links: [
       { type: "maps", url: "https://maps.app.goo.gl/FDQKfxmobU2nnVNx5", label: "Cómo llegar" }
@@ -32,7 +32,7 @@ const steps = [
   },
   {
     label: "Un gato con algo de beber caliente",
-    image: "images/cat-hot-drink.svg",
+    image: "images/5.jpg",
     poem: "Cacahuatl, kakw, biziaa, cajecuas\ntodos nombres que no tenemos\npero si digo chocolate, de una entendemos\npues bien, te invitamos a uno y a todos los que quieras.",
     links: [
       { type: "instagram", url: "https://www.instagram.com/larifachocolateria/", label: "La Rifa Chocolatería" }
@@ -40,7 +40,7 @@ const steps = [
   },
   {
     label: "Un gato negro gordo",
-    image: "images/cat-fat-black.svg",
+    image: "images/6.avif",
     poem: "Detallista no seré\nno tendré el toque que tú\npero estas palabras del corazón vienen\ny que para siempre serán para ti.\n\nTe amo amorcito.",
     links: []
   }
