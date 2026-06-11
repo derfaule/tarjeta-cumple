@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🖤 Cumple Gatuno Kitsch 🎂</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Pacifico&family=Bungee&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="sparkle-layer" aria-hidden="true"></div>
+
+  <header class="hero">
+    <h1 class="hero-title">🎂✨ ¡FELIZ CUMPLEAÑOS! ✨🖤</h1>
+    <p class="hero-subtitle">Un plan paso a paso, tan misterioso y glamuroso como un gato negro a medianoche 🐈‍⬛🌙</p>
+  </header>
+
+  <main>
+    <section class="carousel-wrap">
+      <h2 class="section-title">El Plan, Paso a Paso 🔮</h2>
+
+      <!-- Clock-style dial navigation -->
+      <div class="clock-dial" id="clockDial">
+        <div class="dial-hand" id="dialHand"></div>
+        <div class="dial-center">😼</div>
+      </div>
+
+      <div class="carousel" id="carousel">
+        <button class="nav-btn nav-prev" id="prevBtn" aria-label="Anterior">◀</button>
+
+        <div class="carousel-stage" id="stage"></div>
+
+        <button class="nav-btn nav-next" id="nextBtn" aria-label="Siguiente">▶</button>
+      </div>
+
+      <div class="step-counter" id="stepCounter">Paso 1 / 9</div>
+    </section>
+
+    <section class="map-section">
+      <h2 class="section-title">📍 El Lugar del Aquelarre</h2>
+      <p class="map-text before-text">Antes de llegar... ¡asegúrate de traer tu mejor disfraz felino y muchas ganas de celebrar!</p>
+      <div class="map-frame">
+        <iframe
+          title="Ubicación de la fiesta"
+          src="https://www.google.com/maps?q=Plaza+Mayor,+Madrid&output=embed"
+          width="100%"
+          height="400"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+      <p class="map-text after-text">Después de encontrar el lugar... ¡prepárate para una noche llena de purpurina, gatos negros y mucho pastel! 🐾</p>
+    </section>
+
+    <section class="comments-section">
+      <h2 class="section-title">💌 Deja tu Hechizo (Comentario)</h2>
+      <form class="comment-form" id="commentForm">
+        <input type="text" id="commentName" placeholder="Tu nombre brujeril 🪄" maxlength="40" required>
+        <textarea id="commentText" placeholder="Escribe tu mensaje mágico..." maxlength="300" required></textarea>
+        <button type="submit">Enviar 🐈‍⬛✨</button>
+      </form>
+      <div class="comments-list" id="commentsList"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Hecho con 🖤, purpurina y demasiados gatos negros</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
