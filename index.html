@@ -34,28 +34,33 @@
       <div class="disco-ball" aria-hidden="true"></div>
       <span class="hero-cat">🐈‍⬛</span>
     </div>
-    <h1 class="hero-title" id="heroTitle">happy birthday</h1>
+    <h1 class="cutout-title hero-title" id="heroTitle">happy birthday</h1>
     <p class="hero-subtitle">Un plan paso a paso, tan retro y glamuroso como una bola de discoteca con gatitos negros 🪩🐾</p>
   </header>
 
   <main>
-    <section class="carousel-wrap">
+    <section class="bento-wrap">
       <h2 class="section-title">El Plan, Paso a Paso 🌈</h2>
-
-      <!-- Clock-style dial navigation -->
-      <div class="clock-dial" id="clockDial">
-        <div class="dial-hand" id="dialHand"></div>
-        <div class="dial-center">🪩</div>
-      </div>
-
-      <div class="carousel" id="carousel">
-        <button class="nav-btn nav-prev" id="prevBtn" aria-label="Anterior">◀</button>
-
-        <div class="carousel-stage" id="stage"></div>
-
-        <button class="nav-btn nav-next" id="nextBtn" aria-label="Siguiente">▶</button>
-      </div>
+      <div class="bento-grid" id="bentoGrid"></div>
     </section>
+
+    <div class="detail-overlay" id="detailOverlay">
+      <div class="detail-backdrop" id="detailBackdrop"></div>
+      <div class="detail-card">
+        <button class="detail-close" id="detailClose" aria-label="Cerrar">✕</button>
+        <button class="detail-nav detail-prev" id="detailPrev" aria-label="Paso anterior">◀</button>
+        <div class="photo-frame" id="detailPhotoFrame">
+          <span class="washi-tape"></span>
+          <img class="slide-img" id="detailImg" alt="">
+        </div>
+        <p class="slide-step-label" id="detailStepLabel"></p>
+        <h3 class="cutout-title detail-title" id="detailTitle"></h3>
+        <p class="slide-text before-text" id="detailBefore"></p>
+        <p class="slide-description" id="detailDescription"></p>
+        <p class="slide-text after-text" id="detailAfter"></p>
+        <button class="detail-nav detail-next" id="detailNext" aria-label="Paso siguiente">▶</button>
+      </div>
+    </div>
 
     <section class="map-section">
       <h2 class="section-title">📍 El Lugar de la Fiesta</h2>

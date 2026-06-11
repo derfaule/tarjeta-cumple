@@ -58,11 +58,18 @@ const steps = [
 const TOTAL = steps.length;
 let currentIndex = 0;
 
-const stage = document.getElementById("stage");
-const dial = document.getElementById("clockDial");
-const dialHand = document.getElementById("dialHand");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
+const bentoGrid = document.getElementById("bentoGrid");
+const detailOverlay = document.getElementById("detailOverlay");
+const detailBackdrop = document.getElementById("detailBackdrop");
+const detailClose = document.getElementById("detailClose");
+const detailPrev = document.getElementById("detailPrev");
+const detailNext = document.getElementById("detailNext");
+const detailImg = document.getElementById("detailImg");
+const detailStepLabel = document.getElementById("detailStepLabel");
+const detailTitle = document.getElementById("detailTitle");
+const detailBefore = document.getElementById("detailBefore");
+const detailDescription = document.getElementById("detailDescription");
+const detailAfter = document.getElementById("detailAfter");
 
 function catImageUrl(seed, size) {
   return `https://cataas.com/cat/black?width=${size}&height=${size}&i=${seed}`;
@@ -103,42 +110,37 @@ function buildBackgroundCats() {
   }
 }
 
-function buildSlides() {
+function buildBentoGrid() {
   steps.forEach((step, i) => {
-    const slide = document.createElement("div");
-    slide.className = "slide";
-    slide.dataset.index = i;
-    const tilt = i % 2 === 0 ? "tilt-left" : "tilt-right";
+    const item = document.createElement("button");
+    item.className = "bento-item";
+    item.type = "button";
+    item.style.animationDelay = `-${(i * 0.8).toFixed(1)}s`;
+    item.setAttribute("aria-label", `Ver paso ${i + 1}: ${step.title}`);
 
-    slide.innerHTML = `
-      <div class="photo-frame ${tilt}">
-        <span class="washi-tape"></span>
-        <img class="slide-img" alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
-      </div>
-      <p class="slide-step-label">Paso ${i + 1} de ${TOTAL}</p>
-      <h3 class="slide-title">${step.title}</h3>
-      <p class="slide-text before-text">🔸 ${step.before}</p>
-      <p class="slide-description">${step.description}</p>
-      <p class="slide-text after-text">🔹 ${step.after}</p>
+    item.innerHTML = `
+      <img alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
+      <span class="bento-badge">${i + 1}</span>
+      <p class="bento-label">${step.title}</p>
     `;
 
-    const img = slide.querySelector(".slide-img");
+    const img = item.querySelector("img");
     withFallback(img, i);
-    img.src = catImageUrl(i, 600);
+    img.src = catImageUrl(i, 400);
 
-    stage.appendChild(slide);
+    item.addEventListener("click", () => openDetail(i));
+
+    bentoGrid.appendChild(item);
   });
 }
 
-const titleColors = ["#ff6fa8", "#ffb84d", "#7ed957", "#4dc3ff", "#c98bff", "#ff8a65", "#ffe066"];
+const titleColors = ["#ff0fc4", "#ffb84d", "#00e6a0", "#00c3ff", "#b026ff", "#ff5e3a", "#ffe600"];
 
-function buildHeroTitle() {
-  const el = document.getElementById("heroTitle");
-  const text = el.textContent.trim();
+function buildCutoutTitle(el, text) {
   el.textContent = "";
   let charCount = 0;
 
-  text.split(" ").forEach((word) => {
+  text.trim().split(" ").forEach((word) => {
     const wordEl = document.createElement("span");
     wordEl.className = "word";
 
@@ -157,84 +159,26 @@ function buildHeroTitle() {
   });
 }
 
-function buildDial() {
-  const radius = 43; // percent of dial size
-  for (let i = 0; i < TOTAL; i++) {
-    const angle = (360 / TOTAL) * i;
-    const rad = (angle - 90) * (Math.PI / 180);
-    const x = 50 + radius * Math.cos(rad);
-    const y = 50 + radius * Math.sin(rad);
-
-    const dot = document.createElement("button");
-    dot.className = "dial-dot";
-    dot.style.left = `${x}%`;
-    dot.style.top = `${y}%`;
-    dot.dataset.index = i;
-    dot.textContent = i + 1;
-    dot.setAttribute("aria-label", `Ir al paso ${i + 1}`);
-    dot.addEventListener("click", () => goTo(i));
-
-    dial.appendChild(dot);
-  }
-}
-
-function updateDial() {
-  document.querySelectorAll(".dial-dot").forEach(dot => {
-    dot.classList.toggle("active", Number(dot.dataset.index) === currentIndex);
-  });
-  const angle = (360 / TOTAL) * currentIndex;
-  dialHand.style.transform = `translateX(-50%) rotate(${angle}deg)`;
-}
-
-function render(direction) {
-  const slides = document.querySelectorAll(".slide");
-  slides.forEach((slide, i) => {
-    slide.classList.remove("active", "prev", "next");
-    if (i === currentIndex) {
-      slide.classList.add("active");
-    } else if (i === (currentIndex - 1 + TOTAL) % TOTAL) {
-      slide.classList.add("prev");
-    } else if (i === (currentIndex + 1) % TOTAL) {
-      slide.classList.add("next");
-    }
-  });
-  updateDial();
-}
-
-function goTo(index) {
+function openDetail(index) {
   currentIndex = ((index % TOTAL) + TOTAL) % TOTAL;
-  render();
+  const step = steps[currentIndex];
+
+  detailImg.classList.remove("fallback-cat");
+  detailImg.alt = `Gato negro kitsch del paso ${currentIndex + 1}`;
+  detailImg.src = catImageUrl(currentIndex, 600);
+  withFallback(detailImg, currentIndex);
+
+  detailStepLabel.textContent = `Paso ${currentIndex + 1} de ${TOTAL}`;
+  buildCutoutTitle(detailTitle, step.title);
+  detailBefore.textContent = `🔸 ${step.before}`;
+  detailDescription.textContent = step.description;
+  detailAfter.textContent = `🔹 ${step.after}`;
+
+  detailOverlay.classList.add("open");
 }
 
-function next() {
-  goTo(currentIndex + 1);
-}
-
-function prev() {
-  goTo(currentIndex - 1);
-}
-
-// Parallax effect: gently shift the polaroid photo on mouse movement over the active slide
-function initParallax() {
-  stage.addEventListener("mousemove", (e) => {
-    const activeSlide = stage.querySelector(".slide.active");
-    if (!activeSlide) return;
-    const rect = activeSlide.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    const frame = activeSlide.querySelector(".photo-frame");
-    if (frame) {
-      frame.style.transform = `rotate(var(--rot)) translate(${x * 15}px, ${y * 15}px)`;
-    }
-  });
-
-  stage.addEventListener("mouseleave", () => {
-    const activeSlide = stage.querySelector(".slide.active");
-    if (!activeSlide) return;
-    const frame = activeSlide.querySelector(".photo-frame");
-    if (frame) frame.style.transform = "";
-  });
+function closeDetail() {
+  detailOverlay.classList.remove("open");
 }
 
 // ===== Comments (stored in localStorage) =====
@@ -302,31 +246,19 @@ function initComments() {
 
 // ===== Init =====
 buildBackgroundCats();
-buildHeroTitle();
-buildSlides();
-buildDial();
-render();
-initParallax();
+buildCutoutTitle(document.getElementById("heroTitle"), document.getElementById("heroTitle").textContent);
+buildBentoGrid();
 initComments();
 
-prevBtn.addEventListener("click", prev);
-nextBtn.addEventListener("click", next);
+detailClose.addEventListener("click", closeDetail);
+detailBackdrop.addEventListener("click", closeDetail);
+detailPrev.addEventListener("click", () => openDetail(currentIndex - 1));
+detailNext.addEventListener("click", () => openDetail(currentIndex + 1));
 
-// Keyboard navigation
+// Keyboard navigation (only while the detail overlay is open)
 document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft") prev();
-  if (e.key === "ArrowRight") next();
-});
-
-// Touch swipe support
-let touchStartX = 0;
-stage.addEventListener("touchstart", (e) => {
-  touchStartX = e.changedTouches[0].clientX;
-});
-stage.addEventListener("touchend", (e) => {
-  const touchEndX = e.changedTouches[0].clientX;
-  const diff = touchEndX - touchStartX;
-  if (Math.abs(diff) > 50) {
-    diff > 0 ? prev() : next();
-  }
+  if (!detailOverlay.classList.contains("open")) return;
+  if (e.key === "Escape") closeDetail();
+  if (e.key === "ArrowLeft") openDetail(currentIndex - 1);
+  if (e.key === "ArrowRight") openDetail(currentIndex + 1);
 });
