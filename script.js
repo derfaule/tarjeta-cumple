@@ -199,7 +199,45 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// ===== Lock screen =====
+const LOCK_ANSWER = "choncheto";
+const LOCK_STORAGE_KEY = "tc-unlocked";
+
+function normalizeAnswer(str) {
+  return str
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+}
+
+function setupLockScreen() {
+  const overlay = document.getElementById("lockOverlay");
+  const form = document.getElementById("lockForm");
+  const input = document.getElementById("lockInput");
+  const error = document.getElementById("lockError");
+
+  if (localStorage.getItem(LOCK_STORAGE_KEY) === "1") {
+    overlay.classList.add("unlocked");
+    return;
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (normalizeAnswer(input.value) === LOCK_ANSWER) {
+      localStorage.setItem(LOCK_STORAGE_KEY, "1");
+      overlay.classList.add("unlocked");
+    } else {
+      error.hidden = false;
+      input.value = "";
+      input.focus();
+    }
+  });
+}
+
 // ===== Init =====
+setupLockScreen();
+buildCutoutTitle(document.getElementById("lockTitle"), document.getElementById("lockTitle").textContent);
 buildBackgroundCats();
 buildCutoutTitle(document.getElementById("heroTitle"), document.getElementById("heroTitle").textContent);
 buildBentoGrid();

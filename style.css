@@ -15,6 +15,94 @@
   box-sizing: border-box;
 }
 
+/* ===== Lock screen ===== */
+.lock-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--pink);
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.lock-overlay.unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lock-card {
+  background: #fff;
+  border: 3px solid #fff;
+  border-radius: 18px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+  padding: 2rem 1.5rem;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+}
+
+.lock-emoji {
+  font-size: 2.6rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.lock-title {
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  margin: 0.3rem 0 0.8rem;
+}
+
+.lock-question {
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  font-size: clamp(0.9rem, 3vw, 1.05rem);
+}
+
+#lockForm {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#lockInput {
+  flex: 1 1 160px;
+  padding: 0.6rem 0.9rem;
+  border-radius: 999px;
+  border: 2px solid var(--pink-deep);
+  font-family: 'Stack Sans Headline', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+#lockForm button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--pink-deep);
+  color: #fff;
+  font-family: 'Stack Sans Headline', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#lockForm button:hover {
+  transform: scale(1.05);
+}
+
+.lock-error {
+  color: var(--pink-deep);
+  font-weight: 700;
+  margin: 0.8rem 0 0;
+}
+
 body {
   margin: 0;
   font-family: 'Stack Sans Headline', sans-serif;

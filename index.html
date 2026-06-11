@@ -10,6 +10,19 @@
 </head>
 <body>
 
+  <div class="lock-overlay" id="lockOverlay">
+    <div class="lock-card">
+      <span class="lock-emoji">🔒</span>
+      <h2 class="cutout-title lock-title" id="lockTitle">¡Es privado!</h2>
+      <p class="lock-question">Pregunta secreta: <strong>¿Cómo le dicen a Sancho?</strong></p>
+      <form id="lockForm">
+        <input type="password" id="lockInput" placeholder="Respuesta..." autocomplete="off" required>
+        <button type="submit">Entrar 🐈‍⬛</button>
+      </form>
+      <p class="lock-error" id="lockError" hidden>Respuesta incorrecta, intenta de nuevo 🙀</p>
+    </div>
+  </div>
+
   <div class="sunburst-bg" aria-hidden="true"></div>
 
   <div class="bg-cats" id="bgCats" aria-hidden="true"></div>
