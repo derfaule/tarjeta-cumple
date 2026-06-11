@@ -182,7 +182,7 @@ function buildCutoutTitle(el, text) {
       span.className = "letter";
       span.textContent = char;
       span.style.background = titleColors[charCount % titleColors.length];
-      span.style.color = "#fff";
+      span.style.color = "#2b0a29";
       span.style.transform = `rotate(${(charCount % 2 === 0 ? -1 : 1) * (4 + (charCount % 3) * 2)}deg)`;
       wordEl.appendChild(span);
       charCount++;
