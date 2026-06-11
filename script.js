@@ -74,11 +74,12 @@ function buildSlides() {
     const slide = document.createElement("div");
     slide.className = "slide";
     slide.dataset.index = i;
+    const tilt = i % 2 === 0 ? "tilt-left" : "tilt-right";
 
     slide.innerHTML = `
-      <div class="slide-image-wrap">
-        <img class="slide-bg-img" src="${catImageUrl(i, 800)}" alt="" loading="lazy">
-        <img class="slide-fg-img" src="${catImageUrl(i + 100, 600)}" alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
+      <div class="photo-frame ${tilt}">
+        <span class="washi-tape"></span>
+        <img class="slide-img" src="${catImageUrl(i, 600)}" alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
       </div>
       <p class="slide-step-label">Paso ${i + 1} de ${TOTAL}</p>
       <h3 class="slide-title">${step.title}</h3>
@@ -88,6 +89,33 @@ function buildSlides() {
     `;
 
     stage.appendChild(slide);
+  });
+}
+
+const titleColors = ["#ff6fa8", "#ffb84d", "#7ed957", "#4dc3ff", "#c98bff", "#ff8a65", "#ffe066"];
+
+function buildHeroTitle() {
+  const el = document.getElementById("heroTitle");
+  const text = el.textContent.trim();
+  el.textContent = "";
+  let charCount = 0;
+
+  text.split(" ").forEach((word) => {
+    const wordEl = document.createElement("span");
+    wordEl.className = "word";
+
+    [...word].forEach((char) => {
+      const span = document.createElement("span");
+      span.className = "letter";
+      span.textContent = char;
+      span.style.background = titleColors[charCount % titleColors.length];
+      span.style.color = "#fff";
+      span.style.transform = `rotate(${(charCount % 2 === 0 ? -1 : 1) * (4 + (charCount % 3) * 2)}deg)`;
+      wordEl.appendChild(span);
+      charCount++;
+    });
+
+    el.appendChild(wordEl);
   });
 }
 
@@ -149,7 +177,7 @@ function prev() {
   goTo(currentIndex - 1);
 }
 
-// Parallax effect: move bg/fg cat images on mouse movement over the active slide
+// Parallax effect: gently shift the polaroid photo on mouse movement over the active slide
 function initParallax() {
   stage.addEventListener("mousemove", (e) => {
     const activeSlide = stage.querySelector(".slide.active");
@@ -158,19 +186,17 @@ function initParallax() {
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
 
-    const bg = activeSlide.querySelector(".slide-bg-img");
-    const fg = activeSlide.querySelector(".slide-fg-img");
-    if (bg) bg.style.transform = `scale(1.3) translate(${x * -20}px, ${y * -20}px)`;
-    if (fg) fg.style.transform = `translate(${x * 15}px, ${y * 15}px)`;
+    const frame = activeSlide.querySelector(".photo-frame");
+    if (frame) {
+      frame.style.transform = `rotate(var(--rot)) translate(${x * 15}px, ${y * 15}px)`;
+    }
   });
 
   stage.addEventListener("mouseleave", () => {
     const activeSlide = stage.querySelector(".slide.active");
     if (!activeSlide) return;
-    const bg = activeSlide.querySelector(".slide-bg-img");
-    const fg = activeSlide.querySelector(".slide-fg-img");
-    if (bg) bg.style.transform = "";
-    if (fg) fg.style.transform = "";
+    const frame = activeSlide.querySelector(".photo-frame");
+    if (frame) frame.style.transform = "";
   });
 }
 
@@ -238,6 +264,7 @@ function initComments() {
 }
 
 // ===== Init =====
+buildHeroTitle();
 buildSlides();
 buildDial();
 render();

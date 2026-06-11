@@ -3,28 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🖤 Cumple Gatuno Kitsch 🎂</title>
+<title>🪩 Cumple Retro Gatuno 🎂</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Pacifico&family=Bungee&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@500;700&family=Bungee&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="sparkle-layer" aria-hidden="true"></div>
+  <div class="sunburst-bg" aria-hidden="true"></div>
+
+  <div class="stickers-layer" aria-hidden="true">
+    <span class="sticker sticker-star1">⭐</span>
+    <span class="sticker sticker-heart1">💖</span>
+    <span class="sticker sticker-cherry">🍒</span>
+    <span class="sticker sticker-cupcake">🧁</span>
+    <span class="sticker sticker-bow">🎀</span>
+    <span class="sticker sticker-star2">✨</span>
+    <span class="sticker sticker-cat1">🐈‍⬛</span>
+    <span class="sticker sticker-moon">🌙</span>
+    <span class="sticker sticker-lolly">🍭</span>
+    <span class="sticker sticker-star3">🌟</span>
+    <span class="sticker sticker-heart2">💗</span>
+    <span class="sticker sticker-candle">🕯️</span>
+  </div>
 
   <header class="hero">
-    <h1 class="hero-title">🎂✨ ¡FELIZ CUMPLEAÑOS! ✨🖤</h1>
-    <p class="hero-subtitle">Un plan paso a paso, tan misterioso y glamuroso como un gato negro a medianoche 🐈‍⬛🌙</p>
+    <div class="disco-frame">
+      <div class="disco-ball" aria-hidden="true"></div>
+      <span class="hero-cat">🐈‍⬛</span>
+    </div>
+    <h1 class="hero-title" id="heroTitle">happy birthday</h1>
+    <p class="hero-subtitle">Un plan paso a paso, tan retro y glamuroso como una bola de discoteca con gatitos negros 🪩🐾</p>
   </header>
 
   <main>
     <section class="carousel-wrap">
-      <h2 class="section-title">El Plan, Paso a Paso 🔮</h2>
+      <h2 class="section-title">El Plan, Paso a Paso 🌈</h2>
 
       <!-- Clock-style dial navigation -->
       <div class="clock-dial" id="clockDial">
         <div class="dial-hand" id="dialHand"></div>
-        <div class="dial-center">😼</div>
+        <div class="dial-center">🪩</div>
       </div>
 
       <div class="carousel" id="carousel">
@@ -39,8 +58,8 @@
     </section>
 
     <section class="map-section">
-      <h2 class="section-title">📍 El Lugar del Aquelarre</h2>
-      <p class="map-text before-text">Antes de llegar... ¡asegúrate de traer tu mejor disfraz felino y muchas ganas de celebrar!</p>
+      <h2 class="section-title">📍 El Lugar de la Fiesta</h2>
+      <p class="map-text before-text">Antes de llegar... ¡asegúrate de traer tu mejor look retro y muchas ganas de celebrar!</p>
       <div class="map-frame">
         <iframe
           title="Ubicación de la fiesta"
@@ -54,21 +73,26 @@
         </iframe>
       </div>
       <p class="map-text after-text">Después de encontrar el lugar... ¡prepárate para una noche llena de purpurina, gatos negros y mucho pastel! 🐾</p>
+
+      <div class="invite-note">
+        <span class="washi-tape"></span>
+        <p class="invite-date">9 de Enero<br>20:00 hs<br>En mi casa</p>
+      </div>
     </section>
 
     <section class="comments-section">
-      <h2 class="section-title">💌 Deja tu Hechizo (Comentario)</h2>
+      <h2 class="section-title">💌 Deja tu Mensaje</h2>
       <form class="comment-form" id="commentForm">
-        <input type="text" id="commentName" placeholder="Tu nombre brujeril 🪄" maxlength="40" required>
-        <textarea id="commentText" placeholder="Escribe tu mensaje mágico..." maxlength="300" required></textarea>
-        <button type="submit">Enviar 🐈‍⬛✨</button>
+        <input type="text" id="commentName" placeholder="Tu nombre ✨" maxlength="40" required>
+        <textarea id="commentText" placeholder="Escribe tu mensaje..." maxlength="300" required></textarea>
+        <button type="submit">Enviar 🐈‍⬛💌</button>
       </form>
       <div class="comments-list" id="commentsList"></div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>Hecho con 🖤, purpurina y demasiados gatos negros</p>
+    <p>Hecho con 💖, purpurina y demasiados gatos negros</p>
   </footer>
 
   <script src="script.js"></script>
