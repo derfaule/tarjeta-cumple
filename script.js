@@ -3,55 +3,64 @@ const steps = [
     title: "La Invitación Maldita 🦇",
     before: "Antes: revisa tu correo embrujado, una lechuza (o un email) trae tu invitación...",
     description: "Recibe tu invitación oficial al aquelarre de cumpleaños más kitsch del año. ¡Disfraz obligatorio!",
-    after: "Después: marca la fecha en tu calendario con purpurina y empieza la cuenta regresiva 🌙"
+    after: "Después: marca la fecha en tu calendario con purpurina y empieza la cuenta regresiva 🌙",
+    location: "Plaza Mayor, Madrid"
   },
   {
     title: "El Ritual de Arreglo 💅",
     before: "Antes: elige tu mejor outfit felino, entre más brillos mejor.",
     description: "Maquillaje neón, orejitas de gato y mucho glitter. Hoy todos somos gatos negros de gala.",
-    after: "Después: revisa el espejo tres veces, ¡la magia está en los detalles!"
+    after: "Después: revisa el espejo tres veces, ¡la magia está en los detalles!",
+    location: "Gran Vía, Madrid"
   },
   {
     title: "La Llegada Triunfal 🚪",
     before: "Antes: respira hondo y prepárate para entrar como toda una estrella.",
     description: "Cruza el umbral entre humo de máquina y luces moradas. ¡Bienvenido al cumple!",
-    after: "Después: deja tu abrigo (y tus preocupaciones) en la entrada."
+    after: "Después: deja tu abrigo (y tus preocupaciones) en la entrada.",
+    location: "Puerta del Sol, Madrid"
   },
   {
     title: "El Photocall Felino 📸",
     before: "Antes: practica tu mejor pose misteriosa frente al espejo.",
     description: "Una zona decorada con gatos negros, lunas y estrellas para las fotos más kitsch de la noche.",
-    after: "Después: sube tu foto favorita con el hashtag #GatoCumpleañero."
+    after: "Después: sube tu foto favorita con el hashtag #GatoCumpleañero.",
+    location: "Mercado de San Miguel, Madrid"
   },
   {
     title: "Juegos de Brujas 🪄",
     before: "Antes: forma equipos y elige tu varita (cuchara) de la suerte.",
     description: "Juegos temáticos: caza del gato negro, bingo de hechizos y trivia de cumpleaños.",
-    after: "Después: el equipo ganador recibe un amuleto (dulce) especial."
+    after: "Después: el equipo ganador recibe un amuleto (dulce) especial.",
+    location: "Parque del Retiro, Madrid"
   },
   {
     title: "El Festín 🍕",
     before: "Antes: aparta tu lugar en la mesa, ¡el banquete está por comenzar!",
     description: "Comida deliciosa servida entre velas y decoración kitsch llena de gatos por doquier.",
-    after: "Después: deja espacio para el postre... ¡algo mágico se aproxima!"
+    after: "Después: deja espacio para el postre... ¡algo mágico se aproxima!",
+    location: "Mercado de San Antón, Madrid"
   },
   {
     title: "El Pastel Mágico 🎂",
     before: "Antes: apaga las luces, las velas están listas para encenderse.",
     description: "¡Hora del pastel! Pide tu deseo bajo la mirada atenta de nueve gatos negros.",
-    after: "Después: aplausos, fotos y el primer corte ceremonial del pastel."
+    after: "Después: aplausos, fotos y el primer corte ceremonial del pastel.",
+    location: "Chocolatería San Ginés, Madrid"
   },
   {
     title: "Apertura de Regalos 🎁",
     before: "Antes: forma un círculo mágico alrededor del homenajeado.",
     description: "Cada regalo se abre como si fuera un cofre encantado, ¡con su propio drumroll!",
-    after: "Después: agradecimientos especiales y abrazos para todos."
+    after: "Después: agradecimientos especiales y abrazos para todos.",
+    location: "El Rastro, Madrid"
   },
   {
     title: "El Hechizo de Despedida 🌌",
     before: "Antes: prepárate para el último baile de la noche.",
     description: "Una última canción, una última foto grupal y un brindis bajo la luna.",
-    after: "Después: vuelve a casa con el corazón lleno de magia (y un dulce extra en el bolsillo)."
+    after: "Después: vuelve a casa con el corazón lleno de magia (y un dulce extra en el bolsillo).",
+    location: "Templo de Debod, Madrid"
   }
 ];
 
@@ -110,18 +119,31 @@ function buildBackgroundCats() {
   }
 }
 
+function mapEmbedUrl(location) {
+  return `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`;
+}
+
 function buildBentoGrid() {
   steps.forEach((step, i) => {
-    const item = document.createElement("button");
+    const item = document.createElement("div");
     item.className = "bento-item";
-    item.type = "button";
+    item.tabIndex = 0;
+    item.setAttribute("role", "button");
     item.style.animationDelay = `-${(i * 0.8).toFixed(1)}s`;
     item.setAttribute("aria-label", `Ver paso ${i + 1}: ${step.title}`);
 
     item.innerHTML = `
-      <img alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
-      <span class="bento-badge">${i + 1}</span>
-      <p class="bento-label">${step.title}</p>
+      <div class="bento-photo">
+        <img alt="Gato negro kitsch del paso ${i + 1}" loading="lazy">
+        <span class="bento-badge">${i + 1}</span>
+      </div>
+      <div class="bento-content">
+        <h3 class="bento-title">${step.title}</h3>
+        <p class="bento-desc">${step.description}</p>
+      </div>
+      <div class="bento-map" aria-hidden="true">
+        <iframe src="${mapEmbedUrl(step.location)}" loading="lazy" tabindex="-1" title="Mapa de ${step.title}"></iframe>
+      </div>
     `;
 
     const img = item.querySelector("img");
@@ -129,6 +151,12 @@ function buildBentoGrid() {
     img.src = catImageUrl(i, 400);
 
     item.addEventListener("click", () => openDetail(i));
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openDetail(i);
+      }
+    });
 
     bentoGrid.appendChild(item);
   });
