@@ -22,7 +22,13 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  background: var(--pink);
+  background:
+    linear-gradient(rgba(255, 15, 196, 0.82), rgba(255, 15, 196, 0.82)),
+    url("images/PXL_20260216_004708631.jpg");
+  background-repeat: repeat;
+  background-size: 320px;
+  background-blend-mode: overlay;
+  background-color: var(--pink);
 }
 
 @media (min-width: 700px) {
