@@ -69,6 +69,26 @@ function catImageUrl(seed, size) {
   return `https://cataas.com/cat/black?width=${size}&height=${size}&i=${seed}`;
 }
 
+const BG_CAT_COUNT = 8;
+
+function buildBackgroundCats() {
+  const layer = document.getElementById("bgCats");
+  for (let i = 0; i < BG_CAT_COUNT; i++) {
+    const img = document.createElement("img");
+    const size = 60 + Math.random() * 90;
+    img.className = "bg-cat";
+    img.src = catImageUrl(`bg${i}`, 200);
+    img.alt = "";
+    img.style.width = `${size}px`;
+    img.style.height = `${size}px`;
+    img.style.top = `${Math.random() * 95}%`;
+    img.style.left = `${Math.random() * 95}%`;
+    img.style.animationDuration = `${20 + Math.random() * 25}s`;
+    img.style.animationDelay = `-${Math.random() * 20}s`;
+    layer.appendChild(img);
+  }
+}
+
 function buildSlides() {
   steps.forEach((step, i) => {
     const slide = document.createElement("div");
@@ -264,6 +284,7 @@ function initComments() {
 }
 
 // ===== Init =====
+buildBackgroundCats();
 buildHeroTitle();
 buildSlides();
 buildDial();
