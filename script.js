@@ -186,74 +186,17 @@ function closeDetail() {
   detailOverlay.classList.remove("open");
 }
 
-// ===== Comments (stored in localStorage) =====
-const COMMENTS_KEY = "kitschCardComments";
-
+// ===== HTML escaping =====
 function escapeHtml(str) {
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
 }
 
-function loadComments() {
-  try {
-    return JSON.parse(localStorage.getItem(COMMENTS_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
-function saveComments(comments) {
-  localStorage.setItem(COMMENTS_KEY, JSON.stringify(comments));
-}
-
-function renderComments() {
-  const list = document.getElementById("commentsList");
-  const comments = loadComments();
-
-  if (comments.length === 0) {
-    list.innerHTML = `<p class="empty-comments">¡Sé el primero en dejar tu hechizo de buenos deseos! 🐈‍⬛</p>`;
-    return;
-  }
-
-  list.innerHTML = comments
-    .map(c => `
-      <div class="comment-card">
-        <p class="comment-author">${escapeHtml(c.name)} dice:</p>
-        <p class="comment-body">${escapeHtml(c.text)}</p>
-      </div>
-    `)
-    .join("");
-}
-
-function initComments() {
-  const form = document.getElementById("commentForm");
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const nameInput = document.getElementById("commentName");
-    const textInput = document.getElementById("commentText");
-
-    const name = nameInput.value.trim();
-    const text = textInput.value.trim();
-    if (!name || !text) return;
-
-    const comments = loadComments();
-    comments.push({ name, text });
-    saveComments(comments);
-
-    nameInput.value = "";
-    textInput.value = "";
-    renderComments();
-  });
-
-  renderComments();
-}
-
 // ===== Init =====
 buildBackgroundCats();
 buildCutoutTitle(document.getElementById("heroTitle"), document.getElementById("heroTitle").textContent);
 buildBentoGrid();
-initComments();
 
 detailClose.addEventListener("click", closeDetail);
 detailBackdrop.addEventListener("click", closeDetail);
