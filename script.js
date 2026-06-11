@@ -61,7 +61,6 @@ let currentIndex = 0;
 const stage = document.getElementById("stage");
 const dial = document.getElementById("clockDial");
 const dialHand = document.getElementById("dialHand");
-const stepCounter = document.getElementById("stepCounter");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 
@@ -159,17 +158,17 @@ function buildHeroTitle() {
 }
 
 function buildDial() {
-  const radius = 95;
+  const radius = 43; // percent of dial size
   for (let i = 0; i < TOTAL; i++) {
     const angle = (360 / TOTAL) * i;
     const rad = (angle - 90) * (Math.PI / 180);
-    const x = 110 + radius * Math.cos(rad);
-    const y = 110 + radius * Math.sin(rad);
+    const x = 50 + radius * Math.cos(rad);
+    const y = 50 + radius * Math.sin(rad);
 
     const dot = document.createElement("button");
     dot.className = "dial-dot";
-    dot.style.left = `${x}px`;
-    dot.style.top = `${y}px`;
+    dot.style.left = `${x}%`;
+    dot.style.top = `${y}%`;
     dot.dataset.index = i;
     dot.textContent = i + 1;
     dot.setAttribute("aria-label", `Ir al paso ${i + 1}`);
@@ -200,7 +199,6 @@ function render(direction) {
     }
   });
   updateDial();
-  stepCounter.textContent = `Paso ${currentIndex + 1} / ${TOTAL}`;
 }
 
 function goTo(index) {
